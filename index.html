@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        
+        <title>This is a test blog</title>
+        
+        <!-- Google Material icons -->
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
+        <!-- CSS -->
+        <link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
+        <link type="text/css" rel="stylesheet" href="css/style.css" />
+        
+        <!-- Angular JS -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+        
+        <!-- Firebase -->
+        <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+        
+        <!-- AngularFire -->
+        <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+    </head>
+    
+    <!-- NavBar -->
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#!" class="brand-logo" style="padding-left:2%;">Trove Test</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down" style="padding-right:2%;">
+            <li><a href="#">Test</a></li>
+            <li><a href="#">Test</a></li>
+            <li><a href="#">Test</a></li>
+            <li><a class="waves-effect waves-light modal-trigger" href="#modal1">Login</a></li>
+          </ul>
+          <ul class="side-nav" id="mobile-demo">
+            <li><a href="#">Test</a></li>
+            <li><a href="#">Test</a></li>
+            <li><a href="#">Test</a></li>
+            <li><a class="waves-effect waves-light btn modal-trigger" href="#modal1">Login</a></li>
+          </ul>
+        </div>
+      </nav>
+    
+    <body ng-app = "app">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.js"></script>
+        
+        <div ng-controller="mainController" >
+            
+            <div class="container">
+            <div class="center" style="padding-top:20px;padding-bottom:20px;">
+            <!-- Dropdown Trigger -->
+              <a class='dropdown-button btn' href='#' data-activates='dropdown1'>{{ selected }}</a>
+
+              <!-- Dropdown Structure -->
+              <ul id='dropdown1' class='dropdown-content' >
+                <li><a ng-click="order(null)">Unorder</a></li>
+                <li><a ng-click="order('Fashion')">Fashion</a></li>
+                <li><a ng-click="order('Tech')">Tech</a></li>
+                <li><a ng-click="order('Travel')">Travel</a></li>
+                <li><a ng-click="order('Workout')">Workout</a></li>
+              </ul>
+            </div>
+            </div>
+            <div ng-repeat="post in posts | orderBy | filter: search">
+                <div class="row">
+                    <div class="container">
+
+                        <div class="card hoverable">
+                
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="activator" ng-src="{{ post.photo }}">
+                            </div>
+
+                            <div class="card-content">
+                              <span class="card-title activator grey-text text-darken-4">{{post.title}}<i class="material-icons right">more_vert</i></span>
+                              <p>Category:{{ post.postCat }}</p>
+                              <p>Publish Date: {{ post.pubDate | date }} </p>
+                            </div>
+                
+                            <div class="card-reveal">
+                              <span class="card-title grey-text text-darken-4">{{post.title}}<i class="material-icons right">close</i></span>
+                              <p class="flow-text">{{ post.text }}</p>
+                              <div class="card-action" >
+                                  <p>Comments</p>
+                                  
+                                  <div ng-repeat="comment in post.comments">
+                                      <p class="flow-text">{{comment.cont}}</p>
+                                      By:{{comment.user}} on {{comment.pubDate | date}}
+                                      <hr>
+                                  </div>
+                                  
+                                  <div class="row">
+                                    <form class="col s12">
+                                      <div class="row">
+                                        
+                                          <div class="input-field col s6" >
+                                          <i class="material-icons prefix">account_circle</i>
+                                          <input id="icon_prefix" type="text" class="validate" ng-model="name">
+                                          <label for="icon_prefix" style="color:black;">First Name</label>
+                                        </div>
+                                        
+                                        <div class="input-field col s6">
+                                          <i class="material-icons prefix">mode_edit</i>
+                                          <input id="icon_telephone" type="tel" class="validate" ng-model="com">
+                                          <label for="icon_telephone" style="color:black;">Comment</label>
+                                        </div>
+                                          
+                                          <div class="right-align">
+                                            <a class="waves-effect waves-light btn" ng-click="submit(name, com, post.num)" style="color:white;">Publish</a>
+                                          </div>
+                                          
+                                      </div>
+                                    </form>
+                                  </div>  
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div ng-controller="loginController">
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+              <h4>Admin Login</h4>
+              <div class="row">
+                <form class="col s12">
+                 
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="email" type="email" class="validate" ng-model="eml">
+                      <label for="email" data-error="error" data-success=" " style = "color:black">Email</label>
+                    </div>
+                  </div>
+                    
+                    <div class="row">
+                        <div class="input-field col s12">
+                           <input id="password" type="password" class="validate" ng-model="pswd">
+                          <label for="password" style = "color:black">Password</label>
+                        </div>
+                    </div>
+                    <div class="right-align">
+                        <a class="waves-effect waves-light btn" ng-click="login(eml, pswd)">Login</a>
+                    </div>
+                </form>
+              </div>
+                
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+        </div>
+        </div>
+    </body>
+    
+    <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2015 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+    
+</html>

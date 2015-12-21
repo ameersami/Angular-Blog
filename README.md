@@ -11,5 +11,4 @@ publish you mush paste a link to an image url. Uploading files to the firebase
 server is something I did not choose to do as it would possibly slow down the
 load time of the site as well as eat up my firebase account space
 
-#Note as this was built with Firebase any comments or posts created by anybody
-will be pushed to anyone viewing the application
+#Note as this was built with Firebase any comments or posts created by anybody will be pushed to anyone viewing the application

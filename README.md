@@ -12,4 +12,4 @@ server is something I did not choose to do as it would possibly slow down the
 load time of the site as well as eat up my firebase account space
 
 #Note as this was built with Firebase any comments or posts created by anybody
-#will be pushed to anyone viewing the application
+will be pushed to anyone viewing the application
